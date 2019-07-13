@@ -49,13 +49,8 @@ class Directory extends Component {
 
         return(
             <div className={'directory-menu'}>
-                {sections.map(({ product, imageUrl, id, size }) => {
-                    return <MenuItem 
-                                product={ product }
-                                key={ id }
-                                imageUrl={ imageUrl }
-                                size={ size }
-                            />
+                {sections.map(({ id, ...allProps }) => {
+                    return <MenuItem key={ id } { ...allProps } />
                 })}
             </div>
         )
