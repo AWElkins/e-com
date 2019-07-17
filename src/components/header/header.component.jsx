@@ -15,7 +15,7 @@ const Header = ({ currentUser, cartHidden }) => {
     return (
         <div className='header'>
             <Link className='logo-container' to='/'>
-                <Logo className={ 'logo' } />
+                <Logo />
             </Link>
             <div className={ 'options' }>
                 {
