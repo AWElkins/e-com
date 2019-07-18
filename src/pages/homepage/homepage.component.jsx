@@ -1,12 +1,12 @@
 import React from 'react';
-import './homepage.styles.scss';
 import Dictionary from '../../components/directory/directory.component';
+import { HomePageContainer } from './homepage.styles';
 
 const HomePage = () => {
     return (
-            <div className={'homepage'}>
+            <HomePageContainer>
                 <Dictionary />
-            </div>
+            </HomePageContainer>
     )
 }
 
