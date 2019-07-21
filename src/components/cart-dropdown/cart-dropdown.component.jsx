@@ -11,6 +11,7 @@ import './cart-dropdown.styles.scss';
 const Cart = ({ cartItems, history, dispatch }) => {
     return (
         <div className={ 'cart-dropdown' }>
+            <div className={ 'cart-x' } onClick={() => dispatch(toggleCartHidden())}>&#10005;</div>
             <div className={ 'cart-items' }>
                 {
                     cartItems.length ? (

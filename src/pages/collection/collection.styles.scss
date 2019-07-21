@@ -1,10 +1,29 @@
 .collection-page {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-auto-flow: row;
 
-  .title {
+  .title-container {
+    display: grid;
+    width: 100%;
+    grid-auto-flow: column;
+    grid-template-columns: 1fr 2fr 1fr;
+  }
+
+  .title-back {
+    align-items: center;
+    > a {
+      text-decoration: none;
+
+      &:visited {
+        color: black;
+      }
+    }
+    
+  }
+
+  .title-heading {
     font-size: 38px;
-    margin: 0 auto 30px;
+    text-align: center;
   }
 
   .items {
