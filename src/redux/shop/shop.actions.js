@@ -21,6 +21,7 @@ export const fetchCollectionsStartAsync = () => {
         dispatch(fetchCollectionsStart());
 
         collectionRef.get().then( snapshot => {
+            console.log("Inside collection ref");
             const collectionMap = covertCollectionsSnapshotToMap(snapshot);
             dispatch(fetchCollectionsSuccess(collectionMap));
         }).catch( err => dispatch(fetchCollectionsFailure(err.message)))
