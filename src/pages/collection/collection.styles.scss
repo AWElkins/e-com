@@ -10,14 +10,8 @@
   }
 
   .title-back {
-    align-items: center;
-    > a {
-      text-decoration: none;
-
-      &:visited {
-        color: black;
-      }
-    }
+    margin-top: 10px;
+    cursor: pointer;
     
   }
 
