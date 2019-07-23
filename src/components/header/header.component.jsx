@@ -17,7 +17,7 @@ import { selectCurrentUser } from '../../redux/user/user.selectors';
 
 
 const Header = ({ currentUser, cartHidden, signOutStart }) => {
-    console.log(signOutStart);
+
     return (
         <HeaderContainer>
             <LogoContainer to='/'>

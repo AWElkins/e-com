@@ -7,9 +7,14 @@
     font-size: 28px;
     margin-bottom: 25px;
     text-decoration: none;
+    color: black;
 
     &:visited {
       color: black;
+    }
+
+    &:hover {
+      color: #525252;
     }
   }
 
