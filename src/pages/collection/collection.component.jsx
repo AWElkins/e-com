@@ -11,11 +11,7 @@ class CollectionPage extends Component {
         this.state = {
 
         }
-    }
-    
-    static getDerivedStateFromProps() {
         window.scrollTo(0, 0);
-        return null;
     }
 
     render() {
