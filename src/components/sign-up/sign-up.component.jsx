@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import SweetAlert from 'sweetalert2-react';
 import { signUpStart } from '../../redux/user/user.actions';
 import FormInput from '../form-input/form-input.component';
 import CustomButton from '../custom-button/custom-button.component';
 import './sign-up.styles.scss';
+import { createStructuredSelector } from 'reselect';
+import { selectedUserError } from '../../redux/user/user.selectors';
 
 class SignUp extends Component {
     constructor(props) {
@@ -13,6 +16,15 @@ class SignUp extends Component {
             email: '',
             password: '',
             confirmPassword: '',
+            error: '',
+        }
+    }
+
+    componentWillReceiveProps(nextProps,nextContext) {
+        const { userError } = nextProps;
+
+        if(userError) {
+            this.setState({ error: userError.message });
         }
     }
 
@@ -35,7 +47,8 @@ class SignUp extends Component {
     }
 
     render() {
-        const { displayName, email, password, confirmPassword } = this.state;
+        const { displayName, email, password, confirmPassword, error } = this.state;
+        const { userError } = this.props;
 
         return (
             <div className={ 'sign-up' } >
@@ -76,13 +89,34 @@ class SignUp extends Component {
                     />
                     <CustomButton type='submit'>SIGN UP</CustomButton>
                 </form>
+
+                {
+                    error &&
+                        <SweetAlert
+                            show={ error }
+                            type='warning'
+                            title='Something went wrong!'
+                            text={ userError }
+                            onConfirm={ () => this.setState({ 
+                                displayName: '',
+                                email: '',
+                                password: '',
+                                confirmPassword: '',
+                                error: '', }) 
+                            }
+                        />
+                }
             </div>
         )
     }
 }
 
+const mapStateToProps = createStructuredSelector({
+    userError: selectedUserError,
+})
+
 const mapDispatchToProps = dispatch => ({
     signUpStart: userCredentials => dispatch(signUpStart(userCredentials)),
 });
 
-export default connect(null,mapDispatchToProps)(SignUp);
+export default connect(mapStateToProps,mapDispatchToProps)(SignUp);
