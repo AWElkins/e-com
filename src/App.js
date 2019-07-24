@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 import './App.css';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -11,33 +11,22 @@ import ShopPage from './pages/shop/shop.component';
 import SignInAndOut from './components/sign-in-and-sign-out/sign-in-and-sign-out.component';
 import CheckoutPage from './pages/checkout/checkout.component';
 
-class App extends Component {
-  unsubscribeFromAuth = null;
-
-  componentDidMount() {
-    const { checkUserSession } = this.props;
+const App = ({ currentUser, checkUserSession }) => {
+  useEffect(() => {
     checkUserSession();
-  }
+  },[checkUserSession]);
 
-  componentWillUnmount() {
-    this.unsubscribeFromAuth();
-  }
-
-  render() {
-    const { currentUser } = this.props;
-
-    return (
-      <>
-        <Header />
-        <Switch>
-          <Route exact path='/' component={ HomePage } />
-          <Route path='/shop' component={ ShopPage } />
-          <Route exact path='/signin' render={ () => currentUser ? <Redirect to='/' /> : <SignInAndOut /> } />
-          <Route exact path='/checkout' component={ CheckoutPage } />
-        </Switch>
-      </>
-    )
-  }
+  return (
+    <>
+      <Header />
+      <Switch>
+        <Route exact path='/' component={ HomePage } />
+        <Route path='/shop' component={ ShopPage } />
+        <Route exact path='/signin' render={ () => currentUser ? <Redirect to='/' /> : <SignInAndOut /> } />
+        <Route exact path='/checkout' component={ CheckoutPage } />
+      </Switch>
+    </>
+  )
 }
 
 const mapDispatchToProps = dispatch => ({
