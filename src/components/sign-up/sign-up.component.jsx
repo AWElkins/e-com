@@ -17,6 +17,7 @@ class SignUp extends Component {
             password: '',
             confirmPassword: '',
             error: '',
+            showError: false,
         }
     }
 
@@ -24,7 +25,7 @@ class SignUp extends Component {
         const { userError } = nextProps;
 
         if(userError) {
-            this.setState({ error: userError.message });
+            this.setState({ error: userError.message, showError: true });
         }
     }
 
@@ -32,10 +33,10 @@ class SignUp extends Component {
         e.preventDefault();
 
         const { signUpStart } = this.props;
-        const { displayName, email, password, confirmPassword } = this.state;
+        const { displayName, email, password, confirmPassword, error } = this.state;
 
-        if(password !== confirmPassword) {
-            alert('Passwords do not match');
+        if(password !== confirmPassword && !error.length) {
+            this.setState({ error: "Passwords do not match.", showError: true });
             return;
         }
 
@@ -43,12 +44,11 @@ class SignUp extends Component {
     }
 
     handleChange = (e,type) => {
-        this.setState({ [type]: e.target.value })
+        this.setState({ [type]: e.target.value, error: '', showError: false })
     }
 
     render() {
-        const { displayName, email, password, confirmPassword, error } = this.state;
-        const { userError } = this.props;
+        const { displayName, email, password, confirmPassword, error, showError } = this.state;
 
         return (
             <div className={ 'sign-up' } >
@@ -93,17 +93,11 @@ class SignUp extends Component {
                 {
                     error &&
                         <SweetAlert
-                            show={ error }
+                            show={ showError }
                             type='warning'
                             title='Something went wrong!'
-                            text={ userError }
-                            onConfirm={ () => this.setState({ 
-                                displayName: '',
-                                email: '',
-                                password: '',
-                                confirmPassword: '',
-                                error: '', }) 
-                            }
+                            text={ error }
+                            onConfirm={ () => this.setState({ error: '', showError: false }) }
                         />
                 }
             </div>
