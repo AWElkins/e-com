@@ -4,9 +4,9 @@ import SweetAlert from 'sweetalert2-react';
 import { signUpStart } from '../../redux/user/user.actions';
 import FormInput from '../form-input/form-input.component';
 import CustomButton from '../custom-button/custom-button.component';
-import './sign-up.styles.scss';
 import { createStructuredSelector } from 'reselect';
 import { selectedUserError } from '../../redux/user/user.selectors';
+import { SignUpContainer, SignUpTitle } from './sign-up.styles';
 
 const SignUp = ({ userError, signUpStart }) => {
     const [userDetails, setUserDetails] = useState({
@@ -44,8 +44,8 @@ const SignUp = ({ userError, signUpStart }) => {
     
 
     return (
-        <div className={ 'sign-up' } >
-            <h2 className={ 'title' }>I do not have a account</h2>
+        <SignUpContainer>
+            <SignUpTitle>I do not have a account</SignUpTitle>
             <span>Sign up with your e-mail and password</span>
             <form className={ 'sign-up-form' } onSubmit={ handleSubmit }>
                 <FormInput
@@ -93,7 +93,7 @@ const SignUp = ({ userError, signUpStart }) => {
                         onConfirm={ () => setUserDetails({ ...userDetails, error: '', showError: false }) }
                     />
             }
-        </div>
+        </SignUpContainer>
     )
 }
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import StripCheckout from 'react-stripe-checkout';
 import axios from 'axios';
+import SweetAlert from 'sweetalert2-react';
 
 const StripeCheckoutButton = ({ price }) => {
     const priceForStripe = price * 100;

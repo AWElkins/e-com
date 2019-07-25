@@ -1,20 +1,24 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import CollectionItem from '../collection-item/collection-item.component';
-import './collection-preview.styles.scss';
+import {
+    CollectionPreviewContainer,
+    TitleContainer,
+    PreviewContainer
+  } from './collection-preview.styles';
 
 const CollectionPreview = ({title, items}) => {
     return (
-        <div className={ 'collection-preview' }>
-            <h1>
+        <CollectionPreviewContainer>
+            <TitleContainer>
                 <Link 
                     className={ 'title' }
                     to={`shop/${title.toLowerCase()}`}
                 >
                     {title.toUpperCase()}
                 </Link>
-            </h1>
-            <div className={ 'preview' }>
+            </TitleContainer>
+            <PreviewContainer>
                 {
                     items
                         .filter((item,idx) => idx < 4)
@@ -22,8 +26,8 @@ const CollectionPreview = ({title, items}) => {
                             <CollectionItem key={ item.id } item={ item } />
                         ))
                 }
-            </div>
-        </div>
+            </PreviewContainer>
+        </CollectionPreviewContainer>
     )
 }
 
